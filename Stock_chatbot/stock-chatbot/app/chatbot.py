@@ -121,7 +121,7 @@ class Chatbot:
     """Thin wrapper around the OpenAI chat completions API."""
 
     def __init__(self, api_key: str | None = None, model: str | None = None):
-        self.client = OpenAI(config.OPENAI_API_KEY)
+        self.client = OpenAI(api_key=api_key or config.OPENAI_API_KEY)
         self.model = config.OPENAI_MODEL
 
     def ask(
