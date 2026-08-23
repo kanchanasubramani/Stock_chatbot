@@ -1,0 +1,15 @@
+# Secrets — never commit real API keys
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# RAG runtime data — regenerate locally, don't ship in git
+data/embeddings_cache/*.json
+
+# Keep the folder structure even though its contents are ignored
+!data/documents/.gitkeep
+!data/embeddings_cache/.gitkeep
