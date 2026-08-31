@@ -13,3 +13,6 @@ logging.basicConfig(
         logging.FileHandler(LOG_DIR / "app.log"),
     ],
 )
+def get_logger(name: str) -> logging.Logger:
+    """Return a module-level logger with the app's standard format."""
+    return logging.getLogger(name)
