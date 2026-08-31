@@ -7,6 +7,14 @@ Chatbot, ConversationManager, and guardrails behind a simple chat UI.
 Run with:
     streamlit run app.py
 """
+import os
+from pathlib import Path      # ← add this line
+
+from dataclasses import dataclass
+
+from dotenv import load_dotenv
+
+from app.logger import get_logger 
 
 import time
 

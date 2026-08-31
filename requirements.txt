@@ -6,3 +6,4 @@ openai
 pypdf
 tiktoken
 numpy
+Pathlibaddgit
