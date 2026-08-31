@@ -77,7 +77,7 @@ user question
 
 ## 2. Run locally
 ```bash
-cd stock-rag-chatbot
+cd Stock_chatbot/stock-chatbot
 pip install -r requirements.txt
 streamlit run app.py
 ```
