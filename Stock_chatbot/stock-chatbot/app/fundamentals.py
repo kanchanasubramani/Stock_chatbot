@@ -54,7 +54,9 @@ class Fundamentals:
         logger.info("API request started | endpoint=OVERVIEW | symbol=%s", symbol)
 
         try:
-            response = requests.get(self.base_url, params=params, timeout=10)
+            response = requests.get(
+                self.base_url, params=params, timeout=config.SETTINGS.request_timeout_seconds
+            )
             response.raise_for_status()
         except requests.exceptions.RequestException as exc:
             logger.error("API request failed | symbol=%s | reason=network_error", symbol)

@@ -59,7 +59,7 @@ import tiktoken
 from openai import OpenAI, OpenAIError
 from pypdf import PdfReader
 
-from app import config
+from app import config, guardrails
 
 logger = config.get_logger(__name__)
 
@@ -187,9 +187,12 @@ class DocumentStore:
         new_embeddings = 0
         seen_ids: set[str] = set()
 
-        for filename in sorted(os.listdir(self.docs_dir)):
-            if not filename.lower().endswith(".pdf"):
-                continue
+        # Folder-level cost bound, previously defined in guardrails.py but
+        # never called: caps file count and total MB per ticker before any
+        # PDF is opened, rather than letting an oversized folder ingest in full.
+        accepted_filenames = guardrails.validate_documents_folder(self.symbol, self.docs_dir)
+
+        for filename in accepted_filenames:
             pdf_path = os.path.join(self.docs_dir, filename)
 
             try:
