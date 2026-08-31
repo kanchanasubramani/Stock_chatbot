@@ -43,11 +43,13 @@ MAX_INPUT_CHARS = int(os.getenv("MAX_INPUT_CHARS", "200"))
 # RAG (document retrieval) settings
 # ---------------------------------------------------------------------------
 # One folder per ticker under DOCUMENTS_DIR, e.g. data/documents/TSLA/*.pdf
-DOCUMENTS_DIR = os.getenv("DOCUMENTS_DIR", "data/documents")
+BASE_DIR = Path(__file__).resolve().parent.parent  # .../stock-chatbot/
+
+DOCUMENTS_DIR = os.getenv("DOCUMENTS_DIR", str(BASE_DIR / "data" / "documents"))
+EMBEDDINGS_CACHE_DIR = os.getenv("EMBEDDINGS_CACHE_DIR", str(BASE_DIR / "data" / "embeddings_cache"))
 
 # Where cached chunk embeddings live (one JSON file per ticker). This cache
 # is the main cost lever: a warm cache means ingest() re-embeds nothing.
-EMBEDDINGS_CACHE_DIR = os.getenv("EMBEDDINGS_CACHE_DIR", "data/embeddings_cache")
 
 # Target size of each chunk sent for embedding, and overlap between
 # consecutive chunks (both in tokens, not characters).
