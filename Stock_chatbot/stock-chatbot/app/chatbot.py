@@ -30,7 +30,11 @@ logger = config.get_logger(__name__)
 # Loaded lazily so importing this module never requires network access.
 _encoding = None
 
-
+"""
+AI models charge by "tokens" (roughly word-pieces). tiktoken is OpenAI's library for 
+counting how many tokens a piece of text will use,
+ so the code can log/estimate cost before sending anything.
+ """
 def _count_tokens(text: str) -> int:
     global _encoding
     if _encoding is None:

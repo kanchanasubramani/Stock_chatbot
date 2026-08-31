@@ -19,6 +19,9 @@ from typing import Optional
 
 import tiktoken
 from openai import OpenAI
+"""OpenAI Moderation API:
+ A free service for developers that analyzes text and images 
+ using multimodal models like omni-moderation-latest."""
 
 from .config import SETTINGS
 from .logger import get_logger
@@ -27,14 +30,35 @@ logger = get_logger(__name__)
 
 # Loaded lazily so importing this module never requires network access.
 _encoding = None
-
+"""
+cl100k_base is an open-source byte-pair encoding (BPE) 
+tokenizer created by OpenAI for models like GPT-4, GPT-3.5-Turbo, and text-embedding-ada-002."""
 
 def _get_encoding():
     global _encoding
     if _encoding is None:
         _encoding = tiktoken.get_encoding("cl100k_base")
     return _encoding
+"""What tokenizer encodings are used for
 
+An encoding defines how raw text gets split into tokens — the numeric units a language model actually processes. They matter for:
+
+Cost and context limits –
+    API pricing and context windows are measured in tokens,
+    not characters or words, so the encoding determines
+    ow much text "fits" and what you're billed for.
+
+Model training/inference – the model was
+    trained on sequences of these specific token IDs, 
+so encoding must match exactly at inference time.
+
+
+Efficiency – better encodings pack more meaning per 
+token (especially for code, non-English languages, 
+whitespace-heavy text like Python), which lowers 
+cost and effectively extends usable context.
+
+"""
 
 TICKER_RE = re.compile(r"^[A-Z]{1,6}(\.[A-Z]{1,3})?$")
 
