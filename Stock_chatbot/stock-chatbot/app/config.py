@@ -8,7 +8,10 @@ for the re-export that keeps existing call sites working).
 
 import os
 
+from pathlib import Path      # ← add this line
+
 from dataclasses import dataclass
+
 
 from dotenv import load_dotenv
 
